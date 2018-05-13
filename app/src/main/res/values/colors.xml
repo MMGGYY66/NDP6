@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!-- section color for sport news -->
+    <color name="Sport">#4A7BA7</color>
+
+    <!-- section color for music with news -->
+    <color name="Music">#04B4B3</color>
+
+    <!-- section color for life and style news -->
+    <color name="Life_and_style">#10CAC9</color>
+
+    <!-- section color for books news -->
+    <color name="Books">#F5A623</color>
+
+    <!-- section color for business news -->
+    <color name="Business">#FF7D50</color>
+
+    <!-- section color for money news -->
+    <color name="Money">#FC6644</color>
+
+    <!-- section color for politics news -->
+    <color name="Politics">#E75F40</color>
+
+    <!-- section color for football news -->
+    <color name="Football">#E13A20</color>
+
+    <!-- section color for media news -->
+    <color name="Media">#D93218</color>
+
+    <!-- section color for stage news -->
+    <color name="Stage">#C03823</color>
+
+
+
+    <!-- Text color for the details of the news in the list item -->
+    <color name="textColorNewsDetails">#B4BAC0</color>
+
+    <!-- Text color for the primary location of the news in the list item -->
+    <color name="textColorNewsAuthor">#2B3D4D</color>
+
+
+</resources>
