@@ -59,6 +59,7 @@ public final class QueryUtils {
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
+
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
@@ -167,7 +168,7 @@ public final class QueryUtils {
         }
 
         // Create an empty ArrayList that we can start adding news to
-        List<News> allNews = new ArrayList<>();
+        List<News> News = new ArrayList<>();
 
 
         // Try to parse the JSON response string. If there's a problem with the way the JSON
@@ -179,9 +180,16 @@ public final class QueryUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonresponse = new JSONObject(newsJSON);
 
-            // Extract the JSONArray associated with the key called "response",
+            // Extract the JSONObject associated with the key called "response",
             // which represents a list of response (or news).
-            JSONArray newsArray = baseJsonresponse.getJSONArray("response");
+            JSONObject newsObject = baseJsonresponse.getJSONObject("response");
+
+
+            // For a given news, extract the JSONArray associated with the
+            // key called "results", which represents a list of all results
+            // for that news.
+            JSONArray newsArray = newsObject.getJSONArray("results");
+
 
             // For each news in the newsArray, create an {@link News} object
             for(int i = 0; i < newsArray.length(); i++) {
@@ -191,44 +199,46 @@ public final class QueryUtils {
                 JSONObject currentNews = newsArray.getJSONObject(i);
 
 
-                // For a given news, extract the JSONObject associated with the
-                // key called "results", which represents a list of all results
-                // for that news.
-                JSONObject results = currentNews.getJSONObject("results");
 
 
 
                 // Extract the value for the key called "section"
-                String section = results.getString("sectionName");
+                String section = currentNews.getString("sectionName");
 
                 // Extract the value for the key called "title"
-                String title = results.getString("webTitle");
+                String title = currentNews.getString("webTitle");
 
 
                 String author = null;
 
                 JSONArray tagsArray = currentNews.getJSONArray("tags");
 
+
+            // For each news in the tagsArray, create an {@link author} object
                 for (int t = 0; t < tagsArray.length(); t++) {
+
                     JSONObject tagsObject = tagsArray.getJSONObject(t);
                     author = tagsObject.getString("webTitle");
+
+
+
                 }
 
 
-                // Extract the value for the key called "time"
-                long time = results.getLong("webPublicationDate");
+                // Extract the value for the key called "date"
+                String dateTime = currentNews.getString("webPublicationDate");
 
 
                 // Extract the value for the key called "url"
-                String url = results.getString("webUrl");
+                String url = currentNews.getString("webUrl");
 
 
                 // Create a new {@link News} object with the section, title, author, time,
                 // and url from the JSON response.
-                News news = new News(section, title, time, author, url);
+                News news = new News(section, title, dateTime, author, url);
 
                 // Add the new {@link News} to the list of news.
-                allNews.add(news);
+                News.add(news);
 
 
             }
@@ -241,7 +251,7 @@ public final class QueryUtils {
         }
 
         // Return the list of news
-        return allNews;
+        return News;
     }
 
 }

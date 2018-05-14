@@ -26,6 +26,14 @@ import java.util.Date;
 public class NewsAdapter extends ArrayAdapter<News> {
 
 
+    /**
+     * The part of the date string from the Guardian that we use to determine
+     * date and time of the news.
+     */
+
+    private static final String DATE_SEPARATOR = "T";
+    private static final String TIME_SEPARATOR = "Z";
+
 
     /**
      * Construct a new (@Link NewsAdapter).
@@ -56,6 +64,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
         // Find the news at the given position in the list of news
         News currentNews = getItem(position);
 
+
+        // Get the section string from the News object
+        String section = currentNews.getSection();
+
         // Find the TextView with view ID section
         TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
 
@@ -83,6 +95,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         // Find the TextView with view ID title
         TextView titleView = (TextView) listItemView.findViewById(R.id.title);
+
         // Display the title of the current news in that TextView
         titleView.setText(title);
 
@@ -94,32 +107,49 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         // Find the TextView with view ID author
         TextView authorView = (TextView) listItemView.findViewById(R.id.author);
-        // Display the author offset of the current news in that TextView
-        authorView.setText(author);
+
+        if (currentNews.getAuthor() != null) {
+
+            // Display the author of the current News in that TextView
+            authorView.setText(currentNews.getAuthor());
+        } else {
+            authorView.setVisibility(View.INVISIBLE);
+        }
+
+
+        String originalDateTime = currentNews.getDateTime();
+
+        String newsDate;
+        String newsTime;
+
+        if (originalDateTime.contains(DATE_SEPARATOR)) {
+            String[] parts = originalDateTime.split(DATE_SEPARATOR);
+            newsDate = parts[0];
+            if (parts[1].contains(TIME_SEPARATOR)) {
+                newsTime = parts[1].replace(TIME_SEPARATOR, "");
+            } else {
+                newsTime = parts[1];
+            }
+        } else {
+            newsDate = null;
+            newsTime = null;
+        }
 
 
 
-
-
-        // Create a new Date object from the author of the news
-        Date dateObject = new Date(currentNews.getTimeInMilliseconds());
 
 
         // Find the TextView with view ID date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
 
-        // Format the date string (i.e. "Mar 3, 1984")
-        String formattedDate = formatDate(dateObject);
         // Display the date of the current earthquake in that TextView
-        dateView.setText(formattedDate);
+        dateView.setText(newsDate);
 
         // Find the TextView with view ID time
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
 
-        // Format the time string (i.e. "4:30PM")
-        String formattedTime = formatTime(dateObject);
         // Display the time of the current earthquake in that TextView
-        timeView.setText(formattedTime);
+        timeView.setText(newsTime);
 
 
 
@@ -141,36 +171,39 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
 
         switch (section) {
-            case 0:
-            case 1:
+
+            case "Sport":
                 sectionColorResourceId = R.color.Sport;
                 break;
-            case 2:
+            case "Music":
                 sectionColorResourceId = R.color.Music;
                 break;
-            case 3:
+            case "Life and style":
                 sectionColorResourceId = R.color.Life_and_style;
                 break;
-            case 4:
+            case "Books":
                 sectionColorResourceId = R.color.Books;
                 break;
-            case 5:
+            case "Business":
                 sectionColorResourceId = R.color.Business;
                 break;
-            case 6:
+            case "Money":
                 sectionColorResourceId = R.color.Money;
                 break;
-            case 7:
+            case "Politics":
                 sectionColorResourceId = R.color.Politics;
                 break;
-            case 8:
+            case "Football":
                 sectionColorResourceId = R.color.Football;
                 break;
-            case 9:
+            case "Media":
                 sectionColorResourceId = R.color.Media;
                 break;
-            default:
+            case "Stage":
                 sectionColorResourceId = R.color.Stage;
+                break;
+            default:
+                sectionColorResourceId = R.color.Default;
                 break;
         }
 
@@ -181,21 +214,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
 
 
-    /**
-     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
-     */
-    private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
-        return dateFormat.format(dateObject);
-    }
-
-    /**
-     * Return the formatted time string (i.e. "4:30 PM") from a Date object.
-     */
-    private String formatTime(Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
-    }
 
 
 }

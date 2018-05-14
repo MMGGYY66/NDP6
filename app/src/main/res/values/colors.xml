@@ -37,6 +37,8 @@
     <!-- section color for stage news -->
     <color name="Stage">#C03823</color>
 
+    <!-- section color for default news -->
+    <color name="Default">#FF4081</color>
 
 
     <!-- Text color for the details of the news in the list item -->

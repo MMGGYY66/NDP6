@@ -13,10 +13,8 @@ public class News {
     private String mTitle;
 
     /** Date of the news */
-    private String mDate;
+    private String mDateTime;
 
-    /** Time of the news */
-    private long mTimeInMilliseconds;
 
     /** Author of the news */
     private String mAuthor;
@@ -29,16 +27,16 @@ public class News {
      * Construct a new (@link News) object.
      * @param section is the section of the news
      * @param title is the title of the news
-     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
+     * @param dateTime is the time in milliseconds (from the Epoch) when the
      * news happened
      * @param author is the author of the news
      * @param url is the website URL to find more details about the news
      */
 
-    public News(String section, String title, long timeInMilliseconds, String author, String url) {
+    public News(String section, String title, String dateTime, String author, String url) {
         mSection = section;
         mTitle = title;
-        mTimeInMilliseconds = timeInMilliseconds;
+        mDateTime = dateTime;
         mAuthor = author;
         mUrl = url;
 
@@ -62,7 +60,7 @@ public class News {
     ** Returns the time of the news.
     */
 
-    public long getTimeInMilliseconds() { return mTimeInMilliseconds; }
+    public String getDateTime() { return mDateTime; }
 
 
 
