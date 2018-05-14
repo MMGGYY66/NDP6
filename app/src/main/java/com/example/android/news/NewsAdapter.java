@@ -9,17 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 
 /**
  * An (@LinkNewsAdapter) knows how to create a list item layout for each news
  * in the data source (a list of (@Link News) objects).
- *
+ * <p>
  * These list item layouts will be provided to an adapter view like ListView
  * to be displayed to the user.
  */
@@ -39,7 +35,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
      * Construct a new (@Link NewsAdapter).
      *
      * @param context of the app
-     * @param news is the list of news, which is the data source of the adapter
+     * @param news    is the list of news, which is the data source of the adapter
      */
     public NewsAdapter(Context context, List<News> news) {
         super(context, 0, news);
@@ -76,7 +72,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         sectionView.setText(section);
 
 
-
         // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable sectionRectangle = (GradientDrawable) sectionView.getBackground();
 
@@ -85,8 +80,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         // Set the color on the section rectangle
         sectionRectangle.setColor(sectionColor);
-
-
 
 
         // Get the title string from the News object
@@ -99,11 +92,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         // Display the title of the current news in that TextView
         titleView.setText(title);
 
-
-
-
-        // Get the original author string from the News object
-        String author = currentNews.getAuthor();
 
         // Find the TextView with view ID author
         TextView authorView = (TextView) listItemView.findViewById(R.id.author);
@@ -136,9 +124,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
 
-
-
-
         // Find the TextView with view ID date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
 
@@ -152,12 +137,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
         timeView.setText(newsTime);
 
 
-
         // Return the list item view that is now showing the appropriate data
         return listItemView;
 
     }
-
 
 
     /**
@@ -212,9 +195,4 @@ public class NewsAdapter extends ArrayAdapter<News> {
     }
 
 
-
-
-
-
 }
-
