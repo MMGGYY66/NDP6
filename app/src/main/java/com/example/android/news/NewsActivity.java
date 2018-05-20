@@ -165,7 +165,7 @@ public class NewsActivity extends AppCompatActivity
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String section = sharedPrefs.getString(
                 getString(R.string.settings_section_key),
-                getString(R.string.settings_section_default));
+                getString(R.string.settings_section_sport_value));
 
 
         String orderBy = sharedPrefs.getString(
@@ -217,5 +217,22 @@ public class NewsActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    }

@@ -12,7 +12,7 @@
         android:title="@string/settings_order_by_label" />
 
     <EditTextPreference
-        android:defaultValue="@string/settings_section_default"
+        android:defaultValue="@string/settings_section_sport_value"
         android:inputType="text"
         android:key="@string/settings_section_key"
         android:selectAllOnFocus="true"
