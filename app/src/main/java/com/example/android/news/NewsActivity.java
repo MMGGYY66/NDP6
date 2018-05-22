@@ -179,7 +179,7 @@ public class NewsActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("limit", "10");
         uriBuilder.appendQueryParameter("section", section);
-        uriBuilder.appendQueryParameter("orderby", orderBy);
+        uriBuilder.appendQueryParameter("order-by", orderBy);
 
 
         // Create a new loader for the given URL
@@ -235,4 +235,4 @@ public class NewsActivity extends AppCompatActivity
 
     }
 
-    }
+}
